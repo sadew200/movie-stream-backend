@@ -44,7 +44,7 @@ public class AccountService implements AccountImpl{
         if(loginResponse.isExistsEmail() && loginResponse.isExistsPassword()){
             String jwtToken=jwtService.generateToken(account.getEmail());
             String cookieValue = "jwt=" + jwtToken +
-                    "; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=86400";
+                    "; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=86400";
 
             response.setHeader("Set-Cookie", cookieValue);
 
