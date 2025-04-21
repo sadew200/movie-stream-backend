@@ -1,9 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://avnadmin:AVNS_FXk2wLyai6wKkNqmx9P@mysql-25d8f5ca-sadewbathiyaa2007.j.aivencloud.com:19037/defaultdb?ssl-mode=REQUIRED
-    username: avnadmin
-    password: AVNS_FXk2wLyai6wKkNqmx9P
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
 
   jpa:
     hibernate:
