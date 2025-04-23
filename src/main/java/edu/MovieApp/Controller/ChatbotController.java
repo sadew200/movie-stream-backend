@@ -6,8 +6,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/chatbot")
-@CrossOrigin(origins = "https://dynamic-chebakia-96e0b5.netlify.app") // Allow Angular frontend to access
+@RequestMapping("/chatbot")
+@CrossOrigin(origins = "https://preeminent-sunflower-c5a8e8.netlify.app") // Allow Angular frontend to access
 public class ChatbotController {
 
     private final String TMDB_API_KEY = "2c305aa6582edcd8901dcdbb9bb2e9de";
