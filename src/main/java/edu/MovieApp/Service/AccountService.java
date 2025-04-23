@@ -14,6 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.ResponseCookie;
+import java.time.Duration;
+import org.springframework.http.HttpHeaders;
+
 import java.util.Optional;
 
 @Service
@@ -44,12 +48,16 @@ public class AccountService implements AccountImpl{
         System.out.println(loginResponse);
         if(loginResponse.isExistsEmail() && loginResponse.isExistsPassword()){
             String jwtToken=jwtService.generateToken(account.getEmail());
-            String cookieValue = "jwt=" + jwtToken +
-                    "; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=86400";
+            ResponseCookie cookie = ResponseCookie.from("jwt", jwtToken)
+                    .httpOnly(true)
+                    .secure(true)
+                    .path("/")
+                    .maxAge(Duration.ofDays(1))
+                    .sameSite("None") // Required for cross-site cookies with Secure
+                    .build();
 
-            response.setHeader("Set-Cookie", cookieValue);
-
-            System.out.println(loginResponse);
+            response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+            
            return ResponseEntity.ok(loginResponse);
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginResponse);
