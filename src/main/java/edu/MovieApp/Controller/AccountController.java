@@ -88,7 +88,7 @@ public class AccountController {
     }
     @GetMapping("logout")
     public ResponseEntity<String> logout(HttpServletResponse response) {
-        String cookieValue = "jwt=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0";
+        String cookieValue = "jwt=; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=0";
         response.setHeader("Set-Cookie", cookieValue);
         return ResponseEntity.ok("Logged out successfully.");
     }
