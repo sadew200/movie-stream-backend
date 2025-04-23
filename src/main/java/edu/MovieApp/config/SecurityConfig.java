@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("login", "validate", "register", "forgotPassword", "verifyOtp", "changePassword", "logout").permitAll()
+                        .requestMatchers("login", "validate", "register", "forgotPassword", "verifyOtp", "changePassword", "logout","chatbot").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -55,7 +55,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://dynamic-chebakia-96e0b5.netlify.app"));
+        config.setAllowedOrigins(List.of("https://preeminent-sunflower-c5a8e8.netlify.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
