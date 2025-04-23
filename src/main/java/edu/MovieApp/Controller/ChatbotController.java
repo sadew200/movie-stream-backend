@@ -7,7 +7,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/chatbot")
-@CrossOrigin(origins = "http://localhost:4200") // Allow Angular frontend to access
+@CrossOrigin(origins = "https://dynamic-chebakia-96e0b5.netlify.app") // Allow Angular frontend to access
 public class ChatbotController {
 
     private final String TMDB_API_KEY = "2c305aa6582edcd8901dcdbb9bb2e9de";
