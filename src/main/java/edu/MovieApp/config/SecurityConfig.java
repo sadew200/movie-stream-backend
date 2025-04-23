@@ -13,6 +13,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+
 @Configuration
 public class SecurityConfig {
 
@@ -25,19 +26,18 @@ public class SecurityConfig {
                         .requestMatchers("login", "validate", "register", "forgotPassword", "verifyOtp", "changePassword", "logout").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.disable())
+                .logout(logout -> logout.disable()) // 👈 disables default Spring logout
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
-                // 🚫 Prevent browser popup by overriding default auth entry point
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> {
                             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.setHeader("WWW-Authenticate", ""); // ✨ disables the popup
+                            response.setHeader("WWW-Authenticate", "");
                             response.getWriter().write("Unauthorized");
                         })
                 )
-
                 .build();
     }
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
