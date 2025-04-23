@@ -4,6 +4,20 @@ spring:
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
 
+  mail:
+    host: smtp-relay.brevo.com
+    port: 587
+    username: 8b2151001@smtp-brevo.com
+    password: n3PfNbdDRzwTM9kG
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    default-encoding: UTF-8
+
+
   jpa:
     hibernate:
       ddl-auto: update

@@ -19,4 +19,9 @@ public class Account {
     @Column(nullable = false)
     private String password;
     private String country;
+
+    public Account(String password, String email) {
+        this.password = password;
+        this.email = email;
+    }
 }

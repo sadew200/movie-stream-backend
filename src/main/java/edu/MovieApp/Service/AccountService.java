@@ -19,6 +19,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AccountService implements AccountImpl{
+    public static String email="";
 
     private static final Logger log = LoggerFactory.getLogger(AccountService.class);
     @Autowired
@@ -44,7 +45,7 @@ public class AccountService implements AccountImpl{
         if(loginResponse.isExistsEmail() && loginResponse.isExistsPassword()){
             String jwtToken=jwtService.generateToken(account.getEmail());
             String cookieValue = "jwt=" + jwtToken +
-                    "; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=86400";
+                    "; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=86400";
 
             response.setHeader("Set-Cookie", cookieValue);
 
@@ -70,5 +71,19 @@ public class AccountService implements AccountImpl{
         }
         return ResponseEntity.status(401).body(accountResponse);
 
+    }
+
+    @Override
+    public ResponseEntity<String> changePassword(String password) {
+        try {
+            Optional<Account> account = accountRepository.findById(email);
+            Account acc = account.get();
+            acc.setPassword(bCryptPasswordEncoder.encode(password));
+            accountRepository.save(acc);
+        }
+        catch (Exception e){
+            ResponseEntity.status(401).body("somthing went wrong");
+        }
+        return ResponseEntity.ok("changed");
     }
 }

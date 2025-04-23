@@ -10,4 +10,6 @@ public interface AccountImpl {
     ResponseEntity<LoginResponse> login(Account account, HttpServletResponse response);
 
     ResponseEntity<AccountResponse> register(Account account);
+
+    ResponseEntity<String> changePassword(String password);
 }
