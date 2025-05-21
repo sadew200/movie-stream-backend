@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("login", "validate", "register", "forgotPassword", "verifyOtp", "changePassword", "logout","chatbot","health").permitAll()
+                        .requestMatchers("login", "validate", "register", "forgotPassword", "verifyOtp", "changePassword", "logout","chatbot","home").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
