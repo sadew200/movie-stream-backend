@@ -44,6 +44,10 @@ public class AccountController {
     public ResponseEntity<LoginResponse> login(HttpServletResponse response, @RequestBody Account account){
         return accountImpl.login(account,response);
     }
+    @GetMapping("home")
+    public String health() {
+        return "App is alive";
+    }
 
 
     @PostMapping("/validate")
